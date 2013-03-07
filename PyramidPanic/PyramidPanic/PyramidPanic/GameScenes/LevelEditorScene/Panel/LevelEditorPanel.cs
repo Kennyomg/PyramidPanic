@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
@@ -66,7 +66,7 @@ namespace PyramidPanic
                     this.position + new Vector2(11f * 32f, 0f)));
             this.levelEditorButtons.Add(
                 new Image(this.levelEditorScene.Game, @"LevelEditorAssets\Button_save",
-                    this.position + new Vector2(14.5f * 32f, 0f)));
+                    this.position + new Vector2(15f * 32f, 0f)));
 
             //Assets toevoegen aan de list levelEditorAssets
             this.levelEditorAssets.Add(new Image(this.levelEditorScene.Game, @"PlaySceneAssets\Blocks\Block",
@@ -119,19 +119,19 @@ namespace PyramidPanic
                                 break;
                             case 1:
                                 //ternary
-                                this.levelEditorScene.LevelIndex = (this.levelEditorScene.LevelIndex < 10) ?
-                                    this.levelEditorScene.LevelIndex + 1 : 10;
+                                this.levelEditorScene.LevelIndex = (this.levelEditorScene.LevelIndex < 11) ?
+                                    this.levelEditorScene.LevelIndex + 1 : 11;
                                 this.levelEditorScene.LoadLevel();
                                 break;
                             case 2:
                                 this.levelEditorAssetsIndex = (this.levelEditorAssetsIndex > 0) ?
                                     this.levelEditorAssetsIndex - 1 : 0;
-                                Console.WriteLine(this.levelEditorAssetsIndex);
+                                //Console.WriteLine(this.levelEditorAssetsIndex);
                                 break;
                             case 3:
                                 this.levelEditorAssetsIndex = (this.levelEditorAssetsIndex < this.levelEditorAssets.Count - 1) ?
                                     this.levelEditorAssetsIndex + 1 : this.levelEditorAssets.Count - 1;
-                                Console.WriteLine(this.levelEditorAssetsIndex);
+                                //Console.WriteLine(this.levelEditorAssetsIndex);
                                 break;
                             case 4:
                                 this.SaveGame();
@@ -142,93 +142,133 @@ namespace PyramidPanic
                     }
                 }
             }
+
             if ((Input.MouseEdgeDetectPressLeft() || Input.MouseEdgeDetectPressRight()) &&
-                Input.MousePosition().X < 640f &&
-                Input.MousePosition().X > 0f &&
-                Input.MousePosition().Y > 0f &&
-                Input.MousePosition().Y < 448f)
+                 Input.MousePosition().X < 640f &&
+                 Input.MousePosition().X > 0f &&
+                 Input.MousePosition().Y > 0f &&
+                 Input.MousePosition().Y < 448f)
             {
-                if (this.levelEditorScene.Level.Explorer.Position != new Vector2(((int)Input.MousePosition().X / 32) * 32f, ((int)Input.MousePosition().Y / 32) * 32f))
+                //Console.WriteLine(this.levelEditorAssetsIndex);
+                if (Input.MouseEdgeDetectPressRight())
                 {
-                    if(Input.MouseEdgeDetectPressRight()){ this.RemoveAsset();} else 
+                    this.RemoveAsset();
+                }
+                else
+                {
+                    if (this.levelEditorScene.Level.Explorer.Position !=
+                        new Vector2(((int)Input.MousePosition().X / 32) * 32,
+                                    ((int)Input.MousePosition().Y / 32) * 32))
                     {
                         this.RemoveAsset();
                         switch (this.levelEditorAssetsIndex)
                         {
                             case 0:
-                                this.PlaceBlock(@"Block", BlockCollision.NotPassable, 'w');
+                                this.PlaceBlock(@"Block", 'w');
                                 break;
                             case 1:
-                                this.PlaceBlock(@"Door", BlockCollision.NotPassable, 'z');
+                                this.PlaceBlock(@"Door", 'z');
                                 break;
                             case 2:
-                                this.PlaceBlock(@"Wall1", BlockCollision.NotPassable, 'x');
+                                this.PlaceBlock(@"Wall1", 'x');
                                 break;
                             case 3:
-                                this.PlaceBlock(@"Wall2", BlockCollision.NotPassable, 'y');
+                                this.PlaceBlock(@"Wall2", 'y');
                                 break;
                             case 4:
-                                this.PlaceBlock(@"Transparant", BlockCollision.Passable, 'B');
-                                this.levelEditorScene.Level.Beetles.Add(new Beetle(this.levelEditorScene.Game, new Vector2(((int)Input.MousePosition().X / 32) * 32f, ((int)Input.MousePosition().Y / 32) * 32f), 2.0f));
+                                this.PlaceBlock(@"Transparant", 'B');
+                                this.levelEditorScene.Level.Beetles.Add(new Beetle(this.levelEditorScene.Game,
+                                                                        new Vector2(((int)Input.MousePosition().X / 32) * 32f,
+                                                                                    ((int)Input.MousePosition().Y / 32) * 32f),
+                                                                        2.0f));
                                 break;
                             case 5:
-                                this.PlaceBlock(@"Transparant", BlockCollision.Passable, 'S');
-                                this.levelEditorScene.Level.Scorpions.Add(new Scorpion(this.levelEditorScene.Game, new Vector2(((int)Input.MousePosition().X / 32) * 32f, ((int)Input.MousePosition().Y / 32) * 32f), 2.0f));
+                                this.PlaceBlock(@"Transparant", 'S');
+                                this.levelEditorScene.Level.Scorpions.Add(new Scorpion(this.levelEditorScene.Game,
+                                                                          new Vector2(((int)Input.MousePosition().X / 32) * 32f,
+                                                                                    ((int)Input.MousePosition().Y / 32) * 32f),
+                                                                          2.0f));
                                 break;
                             case 6:
-                                this.PlaceBlock(@"Transparant", BlockCollision.Passable, 'M');
-                                this.levelEditorScene.Level.Mummies.Add(new Mummy(this.levelEditorScene.Game, new Vector2(((int)Input.MousePosition().X / 32) * 32f, ((int)Input.MousePosition().Y / 32) * 32f), 2.0f));
+                                this.PlaceBlock(@"Transparant", 'M');
+                                this.levelEditorScene.Level.Mummies.Add(new Mummy(this.levelEditorScene.Game,
+                                                                        new Vector2(((int)Input.MousePosition().X / 32) * 32f,
+                                                                                    ((int)Input.MousePosition().Y / 32) * 32f),
+                                                                          1.0f));
                                 break;
                             case 7:
-                                this.PlaceBlock(@"Transparant", BlockCollision.Passable, 'c');
-                                this.PlaceTreasure('c', @"PlaySceneAssets\Treasures\Potion");
+                                this.PlaceBlock(@"Transparant", 'c');
+                                this.addTreasure('c', @"PlaySceneAssets\Treasures\Potion");
                                 break;
                             case 8:
-                                this.PlaceBlock(@"Transparant", BlockCollision.Passable, 'd');
-                                this.PlaceTreasure('d',@"PlaySceneAssets\Treasures\Scarab");
+                                this.PlaceBlock(@"Transparant", 'd');
+                                this.addTreasure('d', @"PlaySceneAssets\Treasures\Scarab");
                                 break;
                             case 9:
-                                this.PlaceBlock(@"Transparant", BlockCollision.Passable, 'a');
-                                this.PlaceTreasure('a',@"PlaySceneAssets\Treasures\Treasure1");
+                                this.PlaceBlock(@"Transparant", 'a');
+                                this.addTreasure('a', @"PlaySceneAssets\Treasures\Treasure1");
                                 break;
                             case 10:
-                                this.PlaceBlock(@"Transparant", BlockCollision.Passable, 'b');
-                                this.PlaceTreasure('b',@"PlaySceneAssets\Treasures\Treasure2");
+                                this.PlaceBlock(@"Transparant", 'b');
+                                this.addTreasure('b', @"PlaySceneAssets\Treasures\Treasure2");
                                 break;
                             case 11:
-                               this.PlaceBlock(@"Transparant", BlockCollision.NotPassable, 'E');
-                                this.levelEditorScene.Level.Explorer = new Explorer(this.levelEditorScene.Game, new Vector2(((int)Input.MousePosition().X / 32) * 32f, ((int)Input.MousePosition().Y / 32) * 32f), 2.0f);
+                                this.PlaceBlock(@"Transparant", 'E');
+                                this.levelEditorScene.Level.Explorer = new Explorer(this.levelEditorScene.Game,
+                                                                                    new Vector2(((int)Input.MousePosition().X / 32) * 32f,
+                                                                                                ((int)Input.MousePosition().Y / 32) * 32f),
+                                                                                    2.0f);
                                 break;
+
                         }
                     }
                 }
-            }
+            }           
+        }//Update
+
+        private void PlaceBlock(string name, Char charItem)
+        {
+            this.levelEditorScene.Level.Blocks[(int)Input.MousePosition().X / 32, (int)Input.MousePosition().Y / 32] =
+                           new Block(this.levelEditorScene.Game,
+                                     name,
+                                     new Vector2(((int)Input.MousePosition().X / 32) * 32f,
+                                                 ((int)Input.MousePosition().Y / 32) * 32f),
+                                     BlockCollision.NotPassable,
+                                     charItem);
         }
 
-        private void PlaceBlock(string name, BlockCollision blockCollision, Char charItem)
+        private void addTreasure(Char charItem, string name)
         {
-            this.levelEditorScene.Level.Blocks[(int)Input.MousePosition().X / 32, (int)Input.MousePosition().Y / 32] = new Block(this.levelEditorScene.Game, name, new Vector2(((int)Input.MousePosition().X / 32) * 32f, ((int)Input.MousePosition().Y / 32) * 32f), blockCollision, charItem);
-        }
-        
-        private void PlaceTreasure(char charItem, string pathName)
-        {
-            this.levelEditorScene.Level.Treasures.Add(new Treasure(charItem, this.levelEditorScene.Game, pathName, new Vector2(((int)Input.MousePosition().X / 32) * 32f, ((int)Input.MousePosition().Y / 32) * 32f)));
+            this.levelEditorScene.Level.Treasures.Add(new Treasure(charItem,
+                                                                   this.levelEditorScene.Game,
+                                                                   name,
+                                                                   new Vector2(((int)Input.MousePosition().X / 32) * 32f,
+                                                                              ((int)Input.MousePosition().Y / 32) * 32f)));
         }
 
         private void RemoveAsset()
         {
-            foreach(Scorpion scorpion in this.levelEditorScene.Level.Scorpions)
+            foreach (Scorpion scorpion in this.levelEditorScene.Level.Scorpions)
             {
-                if( scorpion.Position == new Vector2(((int)Input.MousePosition().X / 32) * 32f, ((int)Input.MousePosition().Y / 32) * 32f))
+                if (scorpion.Position == new Vector2(((int)Input.MousePosition().X/32)*32, ((int)Input.MousePosition().Y/32)*32))
                 {
                     this.levelEditorScene.Level.Scorpions.Remove(scorpion);
                     break;
                 }
             }
 
+            foreach (Treasure treasure in this.levelEditorScene.Level.Treasures)
+            {
+                if (treasure.Position == new Vector2(((int)Input.MousePosition().X / 32) * 32, ((int)Input.MousePosition().Y / 32) * 32))
+                {
+                    this.levelEditorScene.Level.Treasures.Remove(treasure);
+                    break;  
+                }
+            }
+
             foreach (Beetle beetle in this.levelEditorScene.Level.Beetles)
             {
-                if (beetle.Position == new Vector2(((int)Input.MousePosition().X / 32) * 32f, ((int)Input.MousePosition().Y / 32) * 32f))
+                if (beetle.Position == new Vector2(((int)Input.MousePosition().X / 32) * 32, ((int)Input.MousePosition().Y / 32) * 32))
                 {
                     this.levelEditorScene.Level.Beetles.Remove(beetle);
                     break;
@@ -237,43 +277,55 @@ namespace PyramidPanic
 
             foreach (Mummy mummy in this.levelEditorScene.Level.Mummies)
             {
-                if (mummy.Position == new Vector2(((int)Input.MousePosition().X / 32) * 32f, ((int)Input.MousePosition().Y / 32) * 32f))
+                if (mummy.Position == new Vector2(((int)Input.MousePosition().X / 32) * 32,
+                                                  ((int)Input.MousePosition().Y / 32) * 32))
                 {
                     this.levelEditorScene.Level.Mummies.Remove(mummy);
                     break;
                 }
             }
-
-            foreach (Treasure treasure in this.levelEditorScene.Level.Treasures)
+            Console.WriteLine(this.levelEditorAssetsIndex);
+            if (this.levelEditorAssetsIndex == 11)
             {
-                if (treasure.Position == new Vector2(((int)Input.MousePosition().X / 32) * 32f, ((int)Input.MousePosition().Y / 32) * 32f))
-                {
-                    this.levelEditorScene.Level.Treasures.Remove(treasure);
-                    break;
-                }
+                this.levelEditorScene.Level.Explorer = null;
             }
 
             for (int i = 0; i < this.levelEditorScene.Level.Blocks.GetLength(0); i++)
             {
                 for (int j = 0; j < this.levelEditorScene.Level.Blocks.GetLength(1); j++)
                 {
-                    if (this.levelEditorScene.Level.Blocks[i, j].Position == new Vector2(((int)Input.MousePosition().X / 32) * 32f, ((int)Input.MousePosition().Y / 32) * 32f))
+                    if (this.levelEditorScene.Level.Blocks[i, j].Position ==
+                        new Vector2(((int)Input.MousePosition().X / 32) * 32,
+                                    ((int)Input.MousePosition().Y / 32) * 32))
                     {
-                        this.PlaceBlock("Transparant", BlockCollision.Passable, '.'); 
+                        this.PlaceBlock("Transparant", '.');
                     }
                 }
-            }
+            }            
         }
+
         private void SaveGame()
         {
-            string contentLevelPath = @"C:\Users\Kenny\Documents\Visual Studio 2010\Projects\Pyramidpanic2\PyramidPanic\PyramidPanic\PyramidPanicContent\PlaySceneAssets\Levels\" + levelEditorScene.Level.LevelIndex + ".txt";
-            StreamWriter writer = new StreamWriter(new FileStream(this.levelEditorScene.Level.LevelPath,FileMode.Open,FileAccess.Write));
-            StreamWriter writer1 = new StreamWriter(new FileStream(contentLevelPath, FileMode.Open, FileAccess.Write));
+            string contentLevelPath = @"C:\Users\Arjan de Ruijter\Documents\Visual Studio 2010\Projects\AM1A\Blok2\PyramidPanic\PyramidPanic\PyramidPanicContent\PlaySceneAssets\Levels\" + this.levelEditorScene.Level.LevelIndex + ".txt";
+            //Tekstbestand in de executable
+            StreamWriter writer =
+                new StreamWriter(new FileStream(this.levelEditorScene.Level.LevelPath,
+                                                FileMode.Open,
+                                                FileAccess.Write));
+            //Tekstbestand in het project
+            StreamWriter writer1 =
+                new StreamWriter(new FileStream(contentLevelPath,
+                                                FileMode.Open,
+                                                FileAccess.Write));
             string line = "";
             for (int j = 0; j < this.levelEditorScene.Level.Blocks.GetLength(1); j++)
             {
                 for (int i = 0; i < this.levelEditorScene.Level.Blocks.GetLength(0); i++)
                 {
+                    if (this.levelEditorScene.Level.Blocks[i, j].CharItem == 'E')
+                    {
+                        Console.WriteLine(this.levelEditorScene.Level.Blocks[i, j].CharItem);
+                    }
                     line += this.levelEditorScene.Level.Blocks[i, j].CharItem;
                 }
                 writer.WriteLine(line);

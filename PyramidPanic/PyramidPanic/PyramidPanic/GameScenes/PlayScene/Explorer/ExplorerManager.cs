@@ -120,22 +120,35 @@ namespace PyramidPanic
             }
         }
 
-        public static void Distance()
+        public static void CollisionDetectMummies()
         {
             foreach (Mummy mummy in level.Mummies)
             {
-                double distance = Math.Sqrt(Math.Pow((mummy.Position.X - explorer.Position.X), 2d) + Math.Pow((mummy.Position.Y - explorer.Position.Y), 2d));
-                
-                    if(distance < 100 && mummy.State.Color != Color.Red)
-                    {
-                        mummy.State.Color = Color.Red;
-                        mummy.State = new MummyChase(mummy);
-                    }
-                    else if (mummy.State.Color != Color.White)
-                    {
-                        mummy.State.Color = Color.White;
-                        mummy.State = new MummyUp(mummy);
-                    }
+                if (explorer.CollisionRectangle.Intersects(mummy.CollisionRectangle))
+                {
+                    Score.Lives--;
+                    level.LevelPause.RemoveIndex = level.Mummies.IndexOf(mummy);
+                    level.LevelPause.RemoveType = "Mummy";
+                    level.LevelState = level.LevelPause;
+                    break;
+                }
+            }
+        }
+        
+
+        public static bool Distance(Mummy mummy)
+        {
+            double distance = Math.Sqrt(Math.Pow((mummy.Position.X - explorer.Position.X), 2d) + 
+                                        Math.Pow((mummy.Position.Y - explorer.Position.Y), 2d));
+            if (distance < mummy.ChaseDistance)
+            {
+                //mummy.Color = Color.Red;
+                return true;
+            }
+            else
+            {
+                //mummy.Color = Color.White;
+                return false;
             }
         }
 
@@ -148,21 +161,6 @@ namespace PyramidPanic
                     Score.Lives--;
                     level.LevelPause.RemoveIndex = level.Beetles.IndexOf(beetle);
                     level.LevelPause.RemoveType = "Beetle";
-                    level.LevelState = level.LevelPause;
-                    break;
-                }
-            }
-        }
-
-        public static void CollisionDetectMummies()
-        {
-            foreach (Mummy mummy in level.Mummies)
-            {
-                if (explorer.CollisionRectangle.Intersects(mummy.CollisionRectangle))
-                {
-                    Score.Lives--;
-                    level.LevelPause.RemoveIndex = level.Mummies.IndexOf(mummy);
-                    level.LevelPause.RemoveType = "Mummy";
                     level.LevelState = level.LevelPause;
                     break;
                 }

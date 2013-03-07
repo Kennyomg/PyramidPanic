@@ -19,13 +19,8 @@ namespace PyramidPanic
         protected int i = 1;
         private float timer;
         protected float angle = 0f;
-        private Color color = Color.White;
 
-        public Color Color
-        {
-            get {return this.color;}
-            set { this.color = value; }
-        }
+        
         //Constructor
         public AnimatedSprite(IAnimatedSprite animatedSprite)
         {
@@ -52,7 +47,7 @@ namespace PyramidPanic
             this.animatedSprite.Game.SpriteBatch.Draw(this.animatedSprite.Texture,
                                               this.animatedSprite.Rectangle,
                                               new Rectangle(this.xValue[this.i], 0, 32, 32),
-                                              color,
+                                              this.animatedSprite.Color,
                                               this.angle,
                                               new Vector2(16f, 16f),
                                               SpriteEffects.None,

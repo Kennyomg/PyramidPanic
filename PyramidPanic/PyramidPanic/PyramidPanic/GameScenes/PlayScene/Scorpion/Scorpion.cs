@@ -23,35 +23,31 @@ namespace PyramidPanic
         private float right, left;
         private WalkLeft walkLeft;
         private WalkRight walkRight;
+        private Color color;
 
         //Properties
         public WalkLeft WalkLeft
         {
             get { return this.walkLeft; }
         }
-
         public WalkRight WalkRight
         {
             get { return this.walkRight; }
         }
-
         public float Left
         {
             set { this.left = value; }
             get { return this.left; }
         }
-
         public float Right
         {
             set { this.right = value; }
             get { return this.right; }
         }
-
         public float Speed
         {
             get { return this.speed; }
         }
-
         public Vector2 Position
         {
             get { return this.position; }
@@ -64,32 +60,32 @@ namespace PyramidPanic
                 this.collisionRectangle.Y = (int)this.position.Y;
             }
         }
-
         public PyramidPanic Game
         {
             get { return this.game; }
         }
-
         public Texture2D Texture
         {
             get { return this.texture; }
         }
-
         public Rectangle Rectangle
         {
             get { return this.rectangle; }
         }
-
         public Rectangle CollisionRectangle
         {
             get { return this.collisionRectangle; }
             set { this.collisionRectangle = value; }
         }
-
         public IScorpion State
         {
             get { return this.state; }
             set { this.state = value; }
+        }
+        public Color Color
+        {
+            get { return this.color; }
+            set { this.color = value; }
         }
         
         
@@ -106,6 +102,7 @@ namespace PyramidPanic
                                                     (int)this.position.Y,
                                                     this.texture.Width / 4,
                                                     this.texture.Height);
+            this.color = Color.White;
             this.walkLeft = new WalkLeft(this);
             this.walkRight = new WalkRight(this);
             this.state = this.walkRight;

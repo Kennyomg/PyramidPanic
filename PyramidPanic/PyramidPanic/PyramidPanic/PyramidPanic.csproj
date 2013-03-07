@@ -81,13 +81,6 @@
   <ItemGroup>
     <Compile Include="AnimatedSprite\AnimatedSprite.cs" />
     <Compile Include="GameScenes\GameOverScene\GameOverScene.cs" />
-    <Compile Include="GameScenes\PlayScene\Mummy\MummyChase.cs" />
-    <Compile Include="GameScenes\PlayScene\Mummy\MummyDown.cs" />
-    <Compile Include="GameScenes\PlayScene\Mummy\Mummy.cs" />
-    <Compile Include="GameScenes\PlayScene\Mummy\MummyManager.cs" />
-    <Compile Include="GameScenes\PlayScene\Mummy\MummyLeft.cs" />
-    <Compile Include="GameScenes\PlayScene\Mummy\MummyRight.cs" />
-    <Compile Include="GameScenes\PlayScene\Mummy\MummyUp.cs" />
     <Compile Include="GameScenes\PlayScene\Explorer\ExplorerManager.cs" />
     <Compile Include="GameScenes\PlayScene\Explorer\Down.cs" />
     <Compile Include="GameScenes\PlayScene\Explorer\Up.cs" />
@@ -102,6 +95,13 @@
     <Compile Include="GameScenes\PlayScene\Level\LevelEndGame.cs" />
     <Compile Include="GameScenes\PlayScene\Level\LevelNextLevel.cs" />
     <Compile Include="GameScenes\PlayScene\Level\LevelGameOver.cs" />
+    <Compile Include="GameScenes\PlayScene\Mummy\MummyChase.cs" />
+    <Compile Include="GameScenes\PlayScene\Mummy\MummyDown.cs" />
+    <Compile Include="GameScenes\PlayScene\Mummy\MummyLeft.cs" />
+    <Compile Include="GameScenes\PlayScene\Mummy\MummyManager.cs" />
+    <Compile Include="GameScenes\PlayScene\Mummy\Mummy.cs" />
+    <Compile Include="GameScenes\PlayScene\Mummy\MummyRight.cs" />
+    <Compile Include="GameScenes\PlayScene\Mummy\MummyUp.cs" />
     <Compile Include="GameScenes\PlayScene\Scorpion\ScorpionManager.cs" />
     <Compile Include="GameScenes\PlayScene\Scorpion\WalkLeft.cs" />
     <Compile Include="HelperClasses\Image.cs" />

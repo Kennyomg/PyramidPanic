@@ -19,6 +19,7 @@ namespace PyramidPanic
         private Rectangle rectangle, collisionRectangle;
         private Vector2 position;
         private float speed;
+        private Color color;
 
         //State variable is de parentclass van de toestandsklassen
         AnimatedSprite state;
@@ -67,6 +68,11 @@ namespace PyramidPanic
             get { return this.speed; }
         }
 
+        public Color Color
+        {
+            get { return this.color; }
+        }
+
         //Constructor
         public Explorer(PyramidPanic game, Vector2 position, float speed)
         {
@@ -83,6 +89,7 @@ namespace PyramidPanic
                                                     (int)position.Y,
                                                     32,
                                                     32);
+            this.color = Color.White;
             this.state = new Idle(this);
         }
 
@@ -93,7 +100,7 @@ namespace PyramidPanic
             ExplorerManager.CollisionDetectScorpions();
             ExplorerManager.CollisionDetectBeetles();
             ExplorerManager.CollisionDetectMummies();
-            ExplorerManager.Distance();
+            
             this.state.Update(gameTime);
         }
 

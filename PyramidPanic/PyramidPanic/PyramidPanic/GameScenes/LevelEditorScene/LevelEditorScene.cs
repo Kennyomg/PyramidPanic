@@ -37,6 +37,7 @@ namespace PyramidPanic
             get { return this.level; }
             set { this.level = value; }
         }
+
         //Constructor
         public LevelEditorScene(PyramidPanic game)
         {
@@ -65,12 +66,15 @@ namespace PyramidPanic
         //Update
         public void Update(GameTime gameTime)
         {
-            if (Input.EdgeDetectKeyDown(Keys.Escape) || Input.EdgeDetectButtonDown(Buttons.B) || Input.EdgeDetectKeyDown(Keys.B))
+            if (Input.EdgeDetectKeyDown(Keys.Escape) || Input.EdgeDetectButtonDown(Buttons.B))
             {
                 this.game.GameState = new StartScene(this.game);
             }
-            this.levelEditorPanel.Update(gameTime);
-
+            if (Input.EdgeDetectKeyDown(Keys.B))
+            {
+                this.game.GameState = new StartScene(this.game);
+            }
+            this.levelEditorPanel.Update(gameTime);            
         }
 
         //Draw

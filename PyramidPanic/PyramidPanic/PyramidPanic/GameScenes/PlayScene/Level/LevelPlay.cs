@@ -30,14 +30,14 @@ namespace PyramidPanic
                 scorpion.Update(gameTime);
             }
 
-            foreach (Mummy mummy in level.Mummies)
-            {
-                mummy.Update(gameTime);
-            }
-            
             foreach (Beetle beetle in level.Beetles)
             {
                 beetle.Update(gameTime);
+            }
+
+            foreach (Mummy mummy in level.Mummies)
+            {
+                mummy.Update(gameTime);
             }
 
             level.Explorer.Update(gameTime);

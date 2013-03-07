@@ -16,5 +16,6 @@ namespace PyramidPanic
         PyramidPanic Game { get; }
         Rectangle Rectangle { get; }
         Texture2D Texture { get; }
+        Color Color { get; }
     }
 }

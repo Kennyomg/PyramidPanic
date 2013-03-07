@@ -7,7 +7,7 @@ x...ywwxwyw....Bx..x
 w.w....x.E..wS..w..y
 w....wwxwww.ccc.x..w
 x.bbbbbxbS.....ww..x
-y..dddBx....bbbbw..z
+y..dddBx..S.bbbbw..z
 w..S...xw.......w..y
 y.wbbbwxbbbbbbbb.B.x
 z..y.d........S.w..x

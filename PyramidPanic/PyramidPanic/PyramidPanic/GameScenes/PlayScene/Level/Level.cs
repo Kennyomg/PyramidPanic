@@ -18,7 +18,6 @@ namespace PyramidPanic
         //Fields
         private PyramidPanic game;
         private string levelPath;
-        private int levelIndex;
         private List<string> lines;
         private Block[,] blocks;
         private const int GRIDWIDTH = 32;
@@ -38,6 +37,7 @@ namespace PyramidPanic
         private LevelDoorOpen levelDoorOpen;
         private LevelGameOver levelGameOver;
         private LevelNextLevel levelNextLevel;
+        private int levelIndex;
 
         //Properties
         public List<Image> Treasures
@@ -56,16 +56,15 @@ namespace PyramidPanic
             get { return this.beetles; }
         }
 
+        public List<Mummy> Mummies
+        {
+            get { return this.mummies; }
+        }
+
         public Explorer Explorer
         {
             get { return this.explorer; }
             set { this.explorer = value; }
-        }
-
-        public List<Mummy> Mummies
-        {
-            get { return this.mummies; }
-            set { this.mummies = value; }
         }
 
         public Block[,] Blocks
@@ -114,19 +113,21 @@ namespace PyramidPanic
             set { this.levelNextLevel = value; }
         }
 
-        public string LevelPath
-        {
-            get { return this.levelPath; }
-        }
         public int LevelIndex
         {
             get { return this.levelIndex; }
+        }
+
+        public string LevelPath
+        {
+            get { return this.levelPath; }
         }
 
         //Constructor
         public Level(PyramidPanic game, int levelIndex)
         {
             this.game = game;
+            this.levelIndex =  levelIndex;
             /*
             System.IO.Stream stream = TitleContainer.OpenStream(@"Content\PlaySceneAssets\Levels\0.txt");
             System.IO.StreamReader sreader = new System.IO.StreamReader(stream);
@@ -135,7 +136,7 @@ namespace PyramidPanic
             Console.WriteLine("File Size: " + stream.Length);
             stream.Close();
             */
-            this.levelIndex = levelIndex;
+
             this.levelPath = @"Content\PlaySceneAssets\Levels\" + levelIndex + ".txt";
             this.stream = TitleContainer.OpenStream(this.levelPath);
             //this.levelPath = @"Content\PlaySceneAssets\Levels\0.txt";
@@ -163,8 +164,8 @@ namespace PyramidPanic
         {
             this.treasures = new List<Image>();
             this.scorpions = new List<Scorpion>();
-            this.mummies = new List<Mummy>();
             this.beetles = new List<Beetle>();
+            this.mummies = new List<Mummy>();
             this.panel = new Panel(this.game, new Vector2(0f, 448f));
             this.lines = new List<string>();
             //StreamReader reader = new StreamReader(this.levelPath);
@@ -191,8 +192,8 @@ namespace PyramidPanic
             }
             BeetleManager.Level = this;
             ScorpionManager.Level = this;
-            MummyManager.Level = this;
             ExplorerManager.Level = this;
+            MummyManager.Level = this;
         }
 
         private Block LoadBlock(char blockElement, int x, int y)
@@ -220,13 +221,13 @@ namespace PyramidPanic
                 case 'z':
                     return new Block(this.game, @"Door", new Vector2(x, y), BlockCollision.NotPassable, 'z');
                 case 'B':
-                    this.beetles.Add(new Beetle(this.game, new Vector2(x, y), 2.0f));
+                    this.beetles.Add(new Beetle(this.game, new Vector2(x, y), 1.0f));
                     return new Block(this.game, @"Transparant", new Vector2(x, y), BlockCollision.Passable, 'B');
                 case 'M':
-                    this.mummies.Add(new Mummy(this.game, new Vector2(x, y), 1.0f));
+                    this.mummies.Add(new Mummy(this.game, new Vector2(x, y), 1f));
                     return new Block(this.game, @"Transparant", new Vector2(x, y), BlockCollision.Passable, 'M');
                 case 'S':
-                    this.scorpions.Add(new Scorpion(this.game, new Vector2(x, y), 2.0f));
+                    this.scorpions.Add(new Scorpion(this.game, new Vector2(x, y), 1.0f));
                     return new Block(this.game, @"Transparant", new Vector2(x, y), BlockCollision.Passable, 'S');
                 case 'E':
                     this.explorer = new  Explorer (this.game, new Vector2(x, y), 2.0f);
@@ -270,14 +271,14 @@ namespace PyramidPanic
                 scorpion.Draw(gameTime);
             }
 
-            foreach (Mummy mummy in this.mummies)
-            {
-                mummy.Draw(gameTime);
-            }
-
             foreach (Beetle beetle in this.beetles)
             {
                 beetle.Draw(gameTime);
+            }
+
+            foreach (Mummy mummy in this.mummies)
+            {
+                mummy.Draw(gameTime);
             }
 
             if (this.explorer != null)

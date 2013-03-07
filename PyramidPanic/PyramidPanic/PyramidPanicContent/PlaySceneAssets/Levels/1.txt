@@ -1,6 +1,6 @@
 @xwxyzxyxywzxyxwxyxx
-y..a...wyxywyxyw...w
-xc.ccccccScccc.w...x
+y......wyxywyxyw...w
+x..ccccccScccc.w...x
 w.w.....wddddd.w...y
 z.B.aaaaw.aaa......z
 x...ywwywyw....B...x

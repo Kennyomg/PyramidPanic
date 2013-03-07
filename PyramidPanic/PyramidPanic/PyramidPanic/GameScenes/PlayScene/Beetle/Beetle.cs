@@ -21,6 +21,7 @@ namespace PyramidPanic
         private IBeetle state;
         private float speed;
         private float top, bottom;
+        private Color color;
        
 
         //Properties
@@ -29,18 +30,15 @@ namespace PyramidPanic
             set { this.top = value; }
             get { return this.top; }
         }
-
         public float Bottom
         {
             get { return this.bottom; }
             set { this.bottom = value; }
         }
-
         public float Speed
         {
             get { return this.speed; }
         }
-
         public Vector2 Position
         {
             get { return this.position; }
@@ -53,34 +51,33 @@ namespace PyramidPanic
                 this.collisionRectangle.Y = (int)this.position.Y;
             }
         }
-
         public PyramidPanic Game
         {
             get { return this.game; }
         }
-
         public Texture2D Texture
         {
             get { return this.texture; }
         }
-
         public Rectangle Rectangle
         {
             get { return this.rectangle; }
         }
-
         public Rectangle CollisionRectangle
         {
             get { return this.collisionRectangle; }
         }
-
         public IBeetle State
         {
             get { return this.state; }
             set { this.state = value; }
         }
-        
-        
+        public Color Color
+        {
+            get { return this.color; }
+            set { this.color = value; }
+        }
+
         //De constructor
         public Beetle(PyramidPanic game, Vector2 position, float speed)
         {
@@ -91,6 +88,7 @@ namespace PyramidPanic
             this.speed = speed;
             this.rectangle = new Rectangle((int)this.position.X + 16, (int)this.position.Y + 16, this.texture.Width/4, this.texture.Height);
             this.collisionRectangle = new Rectangle((int)this.position.X, (int)this.position.Y, this.texture.Width / 4, this.texture.Height);
+            this.color = Color.White;
             this.state = new WalkDown(this);
         }
 
