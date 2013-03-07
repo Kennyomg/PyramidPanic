@@ -1,0 +1,14 @@
+*.swp
+*.suo
+**/bin/
+**/obj/
+PyramidPanic/PyramidPanic/PyramidPanic/bin/
+PyramidPanic/PyramidPanic/PyramidPanic/obj/
+PyramidPanic/PyramidPanic/PyramidPanicContent/obj/
+**/bin/*
+**/obj/*
+*.cachefile
+*.Debug.cachefile
+*.ccgame
+!*.dll
+*.xls
