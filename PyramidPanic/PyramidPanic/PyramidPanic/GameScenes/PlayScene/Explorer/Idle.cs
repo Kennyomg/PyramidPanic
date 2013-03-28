@@ -35,10 +35,12 @@ namespace PyramidPanic
         //Update
         public override void Update(GameTime gameTime)
         {
+            //Als rechts words ingedrukt dan loopt de explorer naar rechts
             if (Input.DetectKeyDown(Keys.Right))
             {
                 this.explorer.State = new Right(this.explorer);
             }
+            //Als links words ingedrukt dan loopt de explorer naar rechts
             else if (Input.DetectKeyDown(Keys.Left))
             {
                 this.explorer.State = new Left(this.explorer);

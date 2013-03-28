@@ -83,7 +83,7 @@ namespace PyramidPanic
         {
             this.game.GraphicsDevice.Clear(Color.White);
             this.level.Draw(gameTime);
-
+            
         }
     }
 }

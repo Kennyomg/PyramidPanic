@@ -306,7 +306,7 @@ namespace PyramidPanic
 
         private void SaveGame()
         {
-            string contentLevelPath = @"C:\Users\Arjan de Ruijter\Documents\Visual Studio 2010\Projects\AM1A\Blok2\PyramidPanic\PyramidPanic\PyramidPanicContent\PlaySceneAssets\Levels\" + this.levelEditorScene.Level.LevelIndex + ".txt";
+            string contentLevelPath = @"C:\Users\Kenny\Documents\Visual Studio 2010\Projects\Pyramidpanic2\PyramidPanic\PyramidPanic\PyramidPanicContent\PlaySceneAssets\Levels\" + this.levelEditorScene.Level.LevelIndex + ".txt";
             //Tekstbestand in de executable
             StreamWriter writer =
                 new StreamWriter(new FileStream(this.levelEditorScene.Level.LevelPath,
